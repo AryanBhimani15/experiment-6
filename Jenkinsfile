@@ -2,23 +2,22 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Clone') {
+        stage('Check Python') {
             steps {
-                echo 'Cloning repository...'
+                sh 'which python3'
+                sh 'python3 --version'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install Requirements') {
             steps {
-                sh 'python3 -m venv venv'
-                sh '. venv/bin/activate && pip install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
-        stage('Run Flask App') {
+        stage('Test Script') {
             steps {
-                sh '. venv/bin/activate && python app.py &'
+                sh 'echo "Pipeline working successfully"'
             }
         }
     }
