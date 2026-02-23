@@ -2,16 +2,23 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Docker Image') {
+
+        stage('Clone') {
             steps {
-                sh 'docker build -t flask-jenkins-app .'
+                echo 'Cloning repository...'
             }
         }
 
-        stage('Run Container') {
+        stage('Install Dependencies') {
             steps {
-                sh 'docker rm -f flask-jenkins-container || true'
-                sh 'docker run -d -p 5002:5000 --name flask-jenkins-container flask-jenkins-app'
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate && pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Flask App') {
+            steps {
+                sh '. venv/bin/activate && python app.py &'
             }
         }
     }
