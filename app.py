@@ -5,9 +5,9 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return """
-    <h1>Student Information</h1>
-    <p><b>Name:</b> Aryan Bhimani</p>
-    <p><b>App ID:</b> APP12345</p>
+    <h1>Student Details</h1>
+    <p>Name: Aryan Bhimani</p>
+    <p>AppID: EXPERIMENT-6</p>
     """
 
 if __name__ == "__main__":
